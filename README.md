@@ -1,120 +1,200 @@
-**SYLLABUS – COURS COMPLET DOCKER ORIENTÉ JAVA + CI/CD GITHUB ACTIONS + VPS**
-
-**Objectifs pédagogiques** :
-À l’issue de la formation, l’apprenant sera capable de :
-
-* Comprendre et utiliser Docker avec des projets Java
-* Écrire des Dockerfiles efficaces pour des applications Spring Boot ou Java SE
-* Implémenter une pipeline CI/CD avec exécution de tests, création d’image, et déploiement automatique
-* Gérer le cycle de vie d’une application Java conteneurisée jusqu’à sa mise en production sur un VPS Linux
-* Mettre en œuvre des bonnes pratiques de sécurité et d’automatisation
+### SYLLABUS – FORMATION DOCKER ORIENTÉE JAVA, CI/CD & DÉPLOIEMENT SUR VPS
 
 ---
 
-### **CHAPITRE 1 – Introduction à Docker et à la conteneurisation**
+### 🎯 Objectifs pédagogiques
 
-**1.1. Virtualisation vs Conteneurisation**
-**1.2. Architecture Docker (daemon, CLI, registry)**
-**1.3. Installation Docker sur Linux / Windows / Mac**
-**1.4. Premier conteneur : `docker run hello-world`**
+À l’issue de la formation, l’apprenant saura :
 
----
-
-### **CHAPITRE 2 – Bases de manipulation des conteneurs**
-
-**2.1. Lancer, arrêter, supprimer un conteneur**
-**2.2. Travailler en mode interactif et détaché**
-**2.3. Accéder aux logs, entrer dans le shell (`exec`, `logs`)**
-**2.4. Introduction aux images (`pull`, `rmi`, `inspect`)**
+* Utiliser Docker avec un projet Java (Spring Boot)
+* Conteneuriser une application Java
+* Gérer les réseaux, volumes et logs Docker
+* Mettre en place une CI/CD avec tests et déploiement automatisé
+* Configurer un VPS Linux sécurisé pour héberger l’application
+* Déployer et superviser un projet en production
 
 ---
 
-### **CHAPITRE 3 – Création d’images personnalisées pour Java**
+## **CHAPITRE 1 – Introduction à Docker et aux conteneurs**
 
-**3.1. Structure du Dockerfile pour une app Java (avec JAR)**
+### 1.1. Virtualisation vs Conteneurisation
 
-* Exemple : projet Maven ou Gradle
-* `FROM eclipse-temurin:17`, `COPY`, `CMD`, etc.
-  **3.2. Optimisation du Dockerfile (couche de build vs runtime)**
-  **3.3. Gestion de `.dockerignore` et des artefacts**
+* VM vs Conteneur
+* Architecture Docker
 
----
+### 1.2. Composants Docker
 
-### **CHAPITRE 4 – Tests unitaires et intégration continue (CI)**
+* Daemon, client, images, conteneurs, volumes, réseaux
 
-**4.1. Écriture de tests unitaires JUnit / Mockito dans un projet Java**
-**4.2. Exécution automatique des tests dans la pipeline**
-**4.3. Déclenchement du build uniquement si les tests passent**
-**4.4. Exemple avec GitLab CI / GitHub Actions :**
+### 1.3. Installation
 
-* Étapes : checkout, test, build image, push
+* Docker Engine (Linux)
+* Docker Desktop (Mac/Windows)
+* Vérifications (`docker info`, `docker version`)
 
 ---
 
-### **CHAPITRE 5 – Docker Compose et environnement multi-conteneurs**
+## **CHAPITRE 2 – Manipulations de base**
 
-**5.1. `docker-compose.yml` pour Java + PostgreSQL ou MySQL**
-**5.2. Configuration des volumes et des réseaux**
-**5.3. Variables d’environnement pour la BDD**
-**5.4. Déploiement local complet : `docker-compose up -d`**
+### 2.1. Démarrage et gestion des conteneurs
 
----
+* `docker run`, `ps`, `stop`, `rm`, `exec`, `logs`
 
-### **CHAPITRE 6 – Configuration d’un VPS pour hébergement**
+### 2.2. Gestion des images
 
-**6.1. Préparation d’un VPS Linux (Debian/Ubuntu)**
+* `docker pull`, `docker build`, `docker tag`, `rmi`
 
-* Création utilisateur, sécurisation SSH, pare-feu (UFW)
-  **6.2. Installation de Docker et Docker Compose sur le VPS**
-  **6.3. Configuration du nom de domaine et du reverse proxy (NGINX ou Traefik)**
-  **6.4. Sécurisation TLS avec Let's Encrypt (Certbot)**
+### 2.3. Travaux pratiques
+
+* Exécuter une image Java officielle
+* Containeriser une application HelloWorld
 
 ---
 
-### **CHAPITRE 7 – CI/CD avec déploiement sur VPS**
+## **CHAPITRE 3 – Dockerisation d'une application Java**
 
-**7.1. Pipeline CI/CD complète :**
+### 3.1. Dockerfile pour Java
 
-* Étapes : test → build → push image → SSH ou webhook vers VPS
-  **7.2. Configuration d’un runner GitLab auto-hébergé (ou GitHub Actions)**
-  **7.3. Script de déploiement automatique via SSH :**
-* `scp` ou `rsync` des fichiers, puis `docker-compose up -d`
-  **7.4. Gestion des secrets et accès sécurisés**
-* `.env`, `vault`, GitHub secrets, GitLab variables
+* Application JAR (`FROM eclipse-temurin`, `COPY`, `CMD`)
+* Structure et bonnes pratiques
 
----
+### 3.2. Build multi-stage pour Java
 
-### **CHAPITRE 8 – Sécurité et bonnes pratiques**
+* Séparer build (Maven/Gradle) et exécution
 
-**8.1. Exécution sous utilisateur non-root**
-**8.2. Analyse des vulnérabilités avec Trivy / Docker Scout**
-**8.3. Limiter les permissions, ports, ressources**
-**8.4. Bonnes pratiques Dockerfile et compose (labels, healthcheck)**
+### 3.3. .dockerignore et optimisation
+
+* Réduire le contexte de build
 
 ---
 
-### **CHAPITRE 9 – Monitoring et logs en production**
+## **CHAPITRE 4 – Tests unitaires et Intégration continue (CI)**
 
-**9.1. `docker logs`, `docker stats`, `docker top`**
-**9.2. Centralisation des logs via Fluentd ou journald**
-**9.3. Mise en place de Prometheus + Grafana (optionnel)**
+### 4.1. Introduction aux tests unitaires Java
+
+* JUnit, Mockito, Spring Test
+
+### 4.2. Exécution automatisée des tests
+
+* Script Maven/Gradle
+
+### 4.3. CI avec GitHub Actions ou GitLab CI
+
+* Étapes : test → build → push image
+
+### 4.4. Exemple de pipeline CI complet
+
+* Dockerfile + `.github/workflows/docker-deploy.yml`
+* Variables de secrets (Docker Hub, SSH...)
 
 ---
 
-### **CHAPITRE 10 – Projet final Java + Docker + CI/CD + VPS**
+## **CHAPITRE 5 – Docker Compose pour une stack complète**
 
-**Objectif du projet :**
-Conteneuriser une API REST Java (Spring Boot) avec base de données, tests automatisés, pipeline CI/CD, et déploiement automatique sur un VPS.
+### 5.1. Présentation de `docker-compose.yml`
 
-**Livrables attendus :**
+* Services, volumes, réseaux
 
-* `Dockerfile` optimisé
-* `docker-compose.yml` fonctionnel
-* Pipeline GitHub Actions ou GitLab CI avec :
+### 5.2. Projet Java + PostgreSQL/MySQL
 
-  * Tests JUnit
-  * Build image Docker
-  * Push sur Docker Hub ou registry privé
-  * Déploiement sur VPS via SSH
-* Rapport décrivant l’architecture, le pipeline, la sécurisation du VPS et la supervision
+* API REST Java + BDD persistante
 
+### 5.3. Gestion des variables d’environnement
+
+* `.env` + `docker-compose.yml`
+
+---
+
+## **CHAPITRE 6 – Configuration d’un VPS Linux (Debian/Ubuntu)**
+
+### 6.1. Prérequis de sécurité
+
+* Création utilisateur
+* Configuration SSH (clé privée, port, fail2ban, ufw)
+
+### 6.2. Installation des composants
+
+* `docker`, `docker-compose`, `certbot`, `nginx`
+
+### 6.3. Déploiement manuel d’un conteneur
+
+* `scp` ou `git clone` + `docker-compose up -d`
+
+---
+
+## **CHAPITRE 7 – Déploiement automatique (CI/CD sur VPS)**
+
+### 7.1. Pipeline CI/CD complète
+
+* Test → Build → Push → Déploiement
+
+### 7.2. SSH ou Webhook pour déploiement automatique
+
+* `appleboy/ssh-action` (GitHub)
+* GitLab Runner (auto-hébergé possible)
+
+### 7.3. Variables secrètes (Docker Hub, SSH, DB\_PASS)
+
+### 7.4. Notifications (Slack, Discord, email – optionnel)
+
+---
+
+## **CHAPITRE 8 – Registry privé Docker**
+
+### 8.1. Options de registry privé
+
+* Docker Hub, GitHub Container Registry, GitLab Registry
+* Registry privé auto-hébergé (`registry:2`, sécurisé par NGINX)
+
+### 8.2. Push/Pull d’image depuis un registry privé
+
+* `docker login`, `docker tag`, `docker push`
+
+---
+
+## **CHAPITRE 9 – Sécurité & bonnes pratiques Docker**
+
+### 9.1. Sécurité Dockerfile et runtime
+
+* Pas de root, user dédié, pas de `latest`, `HEALTHCHECK`
+
+### 9.2. Scanning et audit d’image
+
+* Trivy, Docker Scout
+
+### 9.3. Sécuriser le VPS et le déploiement
+
+* TLS/HTTPS, UFW, certificats, authentification forte
+
+---
+
+## **CHAPITRE 10 – Supervision et logs**
+
+### 10.1. Logs des conteneurs
+
+* `docker logs`, redirection vers fichiers, syslog
+
+### 10.2. Monitoring simple
+
+* `docker stats`, `prometheus`, `grafana` (optionnel)
+
+---
+
+## **PROJET FINAL – API REST Java + CI/CD + VPS**
+
+### Objectifs :
+
+* Développer une API REST Java Spring Boot
+* Dockeriser l'application + BDD
+* Écrire des tests unitaires
+* Mettre en place une pipeline CI/CD complète
+* Déployer sur un VPS via SSH automatique
+* Suivi du build et des logs
+
+### Livrables :
+
+* `Dockerfile` + `docker-compose.yml`
+* Pipeline CI/CD complet
+* Script de configuration du VPS
+* Rapport d’audit de sécurité et de supervision
+* Schéma d’architecture et documentation technique
