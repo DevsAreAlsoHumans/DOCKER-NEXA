@@ -2,7 +2,7 @@
 
 ---
 
-### 🎯 Objectifs pédagogiques
+### Objectifs pédagogiques
 
 À l’issue de la formation, l’apprenant saura :
 
